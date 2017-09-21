@@ -1,5 +1,5 @@
 CPP=g++
-CPPFLAGS=--std=c++11
+CPPFLAGS=--std=c++14
 RM=rm -f
 
 SRCS=build_test.cpp build.cpp
