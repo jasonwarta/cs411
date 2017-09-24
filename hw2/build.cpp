@@ -1,15 +1,5 @@
 #include "build.h"
 
-#include <iostream>
-#include <algorithm>
-#include <cmath>
-
-using std::sort;
-using std::max;
-using std::cout;
-using std::endl;
-using std::for_each;
-
 void print_bridge(const Bridge & bridge){
 	cout << bridge[0] << "," << bridge[1] << "," << bridge[2] << endl;
 }

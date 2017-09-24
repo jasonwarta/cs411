@@ -4,6 +4,16 @@
 #include <vector>
 using std::vector;
 
+#include <iostream>
+using std::cout;
+using std::endl;
+
+#include <algorithm>
+using std::for_each;
+
+#include <cmath>
+using std::max;
+
 using Bridge = std::vector<int>;
 
 void print_bridge(const Bridge & bridge);
