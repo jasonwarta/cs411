@@ -15,23 +15,20 @@ void print_bridge(const Bridge & bridge){
 }
 
 void print_bridges(const vector<Bridge> & bridges){
-	for (auto i = bridges.begin(); i != bridges.end(); ++i) {
-		print_bridge((*i));
-	}
+	for ( auto & item : bridges )
+		print_bridge( item );
 	cout << endl;
 }
 
 bool bridges_cross(const Bridge & lhs, const Bridge & rhs){
-	return ( lhs[0] < rhs[0] &&
-			 lhs[1] > rhs[1] ) || 
-		   ( lhs[0] > rhs[0] &&
-			 lhs[1] < rhs[1] );
+	return ( lhs[0] < rhs[0] && lhs[1] > rhs[1] ) || 
+		   ( lhs[0] > rhs[0] && lhs[1] < rhs[1] );
 }
 
 bool bridge_crosses_bridges(const Bridge & bridge, const vector<Bridge> & bridges){
-	for ( auto i = bridges.begin(); i != bridges.end(); ++i ) {
-		if ( bridges_cross( bridge, (*i) ) ) return true;
-	}
+	for ( auto & bridge_iter : bridges )
+		if ( bridges_cross( bridge, bridge_iter) ) 
+			return true;
 	return false;
 }
 
@@ -40,25 +37,24 @@ bool same_city(const Bridge & lhs, const Bridge & rhs) {
 }
 
 bool same_city(const Bridge & bridge, const vector<Bridge> & bridges){
-	for ( auto i = bridges.begin(); i != bridges.end(); ++i ) {
-		if ( same_city(bridge, (*i) ) ) return true;
-	}
+	for ( auto & bridge_iter : bridges )
+		if ( same_city( bridge, bridge_iter ) ) 
+			return true;
 	return false;
 }
 
 int build(int w, int e, const vector<Bridge> & bridges){
 	int best_bridge = 0;
-	for ( auto i = 0; i < bridges.size(); ++i ) {
+
+	for(auto & first_bridge : bridges) {
 		vector<Bridge> good_bridges(0);
-		good_bridges.push_back(bridges[i]);
-		for ( auto j = 0; j < bridges.size(); ++j ) {
-			if ( bridge_crosses_bridges( bridges[j], good_bridges ) ) {
+		good_bridges.push_back(first_bridge);
+
+		for(auto & next_bridge : bridges) {
+			if ( bridge_crosses_bridges( next_bridge, good_bridges ) || 
+				 same_city( next_bridge, good_bridges ) ) 
 				continue;
-			}
-			if ( same_city( bridges[j], good_bridges ) ) {
-				continue;
-			}
-			good_bridges.push_back(bridges[j]);
+			good_bridges.push_back( next_bridge );
 		}
 
 		int current_total = 0;
