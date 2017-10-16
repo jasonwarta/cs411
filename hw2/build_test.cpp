@@ -837,6 +837,19 @@ void test_build_medium(Tester & t)
             "All bridges available #3");
     }
 
+    //new test
+    {
+        w = 4;
+        e = 4;
+        bs.clear();
+        bs.push_back(Brg { 0, 1, 1});
+        bs.push_back(Brg { 1, 0, 2});
+        bs.push_back(Brg { 2, 3, 1});
+        bs.push_back(Brg { 3, 2, 2});
+        ans = 4;
+        test_build_single(t, w, e, cbs, ans, "4 cities each side, 2 valid bridges -- new test");
+    }
+
     // Random #1
     {
         w = 12;

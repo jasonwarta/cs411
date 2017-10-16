@@ -33,14 +33,24 @@ bool same_city(const Bridge & bridge, const vector<Bridge> & bridges){
 	return false;
 }
 
+bool unusable_bridge(const Bridge & bridge, const vector<Bridge> & bridges){
+	return ( bridge_crosses_bridges( bridge, bridges ) || 
+			 same_city( bridge, bridges ) );
+}
+
 int build(int w, int e, const vector<Bridge> & bridges){
+	vector<Bridge> more_bridges = bridges;
+	sort(more_bridges.begin(),more_bridges.end(), [](auto &lhs, auto &rhs){
+		return lhs[2] > rhs[2];
+	});
+
 	int best_bridge = 0;
 
-	for(auto & first_bridge : bridges) {
+	for(auto & first_bridge : more_bridges) {
 		vector<Bridge> good_bridges(0);
 		good_bridges.push_back(first_bridge);
 
-		for(auto & next_bridge : bridges) {
+		for(auto & next_bridge : more_bridges) {
 			if ( bridge_crosses_bridges( next_bridge, good_bridges ) || 
 				 same_city( next_bridge, good_bridges ) ) 
 				continue;

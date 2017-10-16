@@ -10,6 +10,7 @@ using std::endl;
 
 #include <algorithm>
 using std::for_each;
+using std::sort;
 
 #include <cmath>
 using std::max;
@@ -24,6 +25,8 @@ bool bridge_crosses_bridges(const Bridge & bridge, const vector<Bridge> & bridge
 
 bool same_city(const Bridge & lhs, const Bridge & rhs);
 bool same_city(const Bridge & bridge, const vector<Bridge> & bridges);
+
+int build_bridges(auto & position, const std::vector<Bridge> & bridges, vector<Bridge> good_bridges);
 
 int build(int w, int e, const std::vector<Bridge> & bridges);
 
